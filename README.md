@@ -46,7 +46,7 @@ branch) as they work. When you need to bring each others branches together, do s
 into your own, following the process we've discussed in previous assignments: 
 
 ```
-    Branch 1 name: _____________
+    Branch 1 name: Nyabutoa
     Branch 2 name: _____________
 ```
 ---
