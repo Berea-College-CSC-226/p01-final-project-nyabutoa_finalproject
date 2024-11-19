@@ -59,7 +59,9 @@ Reflect on what you’ve done so far. How’s it going? Are you feeling behind/a
 What has surprised you so far? Describe your general feelings. Be honest with yourself; this section is for you, not me.
 
 ```
-    I feel very behind and and far from the rest of my classmates.im actuallyw anting to change 
+    I feel very behind and and far from the rest of my classmates.im actually wanting to change my project but we will see how fara long i get
+    with this one but i really want to get a product out by the end of this class so i can get as much assistance as possible.
+    
 ```
 
 ---
