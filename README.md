@@ -77,7 +77,12 @@ Indicate what percentage of the project you have left to complete and how confid
   before the deadline.
 
 ```
-    **Replace this text with your reflection
+Completion Percentage: 75%
+The core features of the playlist manager, including song addition, removal, searching, sorting, shuffling, and file uploads, 
+are implemented. Remaining tasks include testing the program, creating the UI, adding error handling, and integrating audio playback, 
+where there is the ability to play the song of choice. I'm confident about completing the project, as most of the main 
+functionality is already in place, and the remaining work mainly involves refining and testing. 
+To ensure success, I'll focus on testing and potentially adding audio playback or a more user-friendly interface if time permits.
 ```
 
 ---
