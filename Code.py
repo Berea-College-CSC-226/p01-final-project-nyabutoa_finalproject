@@ -1,6 +1,6 @@
 import random
 import tkinter as tk
-from tkinter import filedialog
+from tkinter import filedialog, messagebox
 
 class Song:
     def __init__(self, title, artist, genre, mood, filepath):
@@ -59,50 +59,59 @@ class Playlist:
             return
         self.songs.sort(key=lambda song:getattr(song, key).lower())
 
-def main():
-    manager = Playlist()
-    while True:
-        print ("\nPlaylist Manager:")
-        print("1. Add Song")
-        print("2. Remove songs")
-        print("3. Display Songs")
-        print("4. Search Song")
-        print("5. Shuffle Playlist")
-        print("6. Sort Songs")
-        print("7. Exit")
+class PlaylistManagerGui:
+    def __init__(self, root, playlist):
+        self.root = root
+        self.root.title ("Playlist Manager")
+        self.playlist = playlist
 
-        choice = input ("Enter yur choice (1-7): ").strip()
+        self.song_listbox = tk.Listbox (root, width=60, height=15)
+        self.song_listbox.pack(padx=10, pady=10)
 
-        if choice == "1":
-            title = input("Enter song title: ")
-            artist = input("Enter artist name: ")
-            genre = input("Enter genre: ")
-            mood = input("Enter mood: ")
-            # Ask the user to select a file path
-            file_path = filedialog.askopenfilename(title="Select a Music File", filetypes=[("Audio Files", "*.mp3;*.wav;*.flac")])
-            if file_path:  # Ensure the file path is valid before adding the song
-                manager.add_song(title, artist, genre, mood, file_path)
-            else:
-                print("No file selected. Song not added.")
-        elif choice == "2":
-            title = input ("With a title, what song would you like to remove")
-            manager.remove_song(title)
-        elif choice == "3":
-            manager.show_songs()
-        elif choice == "4":
-            keyword = input("Enter a keyword to search")
-            manager.search_song(keyword)
-        elif choice == "5":
-            manager.playlist_shuffle()
-        elif choice == "6":
-            key = input("Sort by (genre/artist/mood): ").strip().lower()
-            manager.sort_songs(key)
-        elif choice == "7":
-            print("Exiting The Playlist Manager. Goodbye!")
-            break
+        self.add_button = tk.Button(root, text="Add Song", command=self.add_song)
+        self.add_button.pack(pady=5)
+
+        self.remove_button = tk.Button(root, text="Remove Song", command=self.remove_song)
+        self.remove_button.pack(pady=5)
+
+        self.shuffle_button = tk.Button(root, text="Shuffle Playlist", command=self.shuffle_playlist)
+        self.shuffle_button.pack(pady=5)
+
+        self.search_button = tk.Button(root, text="Search Song", command=self.search_song)
+        self.search_button.pack(pady=5)
+
+        self.sort_button = tk.Button(root, text="Sort Playlist", command=self.sort_playlist)
+        self.sort_button.pack(pady=5)
+
+        self.display_songs()
+
+    def add_song(self):
+        title = simple_input("Enter song title:")
+        artist = simple_input("Enter artist name:")
+        genre = simple_input("Enter genre:")
+        mood = simple_input("Enter mood:")
+
+        file_path = filedialog.askopenfilename(title="Select a Music File",
+                                               filetypes=[("Audio Files", "*.mp3;*.wav;*.flac")])
+        if file_path:
+            self.playlist.add_song(title, artist, genre, mood, file_path)
+            self.display_songs()
         else:
-            print("Invalid choice. Please try again.")
+            messagebox.showwarning("No File Selected", "No file selected. Song not added.")
 
+    def remove_song(self):
+        title = simple_input("Enter song title to remove:")
+        self.playlist.remove_song(title)
+        self.display_songs()
+    def shuffle_playlist
+
+
+
+def main():
+    root = tk.Tk()
+    playlist = Playlist()
+    app = PlaylistManagerGui(root, playlist)
+    root.mainloop()
 
 if __name__ == "__main__":
     main()
