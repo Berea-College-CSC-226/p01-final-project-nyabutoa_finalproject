@@ -1,3 +1,34 @@
+######################################################################
+# Author: Alpha Nyabuto
+# Username: Nyabutoa
+#
+# Assignment: Final Project (Project Manager)
+#
+# Purpose:
+# The Playlist Manager project is a program that allows users to manage
+# and organize playlists. It provides functionality to:
+# - Add, remove, and shuffle songs
+# - Sort songs by genre, artist, or mood
+# - Search for songs based on specific keywords (title, artist, genre, mood)
+#
+# This project is designed to improve user experience in managing their
+# music library, making it easier to sort, search, and maintain a collection of songs.
+#
+######################################################################
+# Acknowledgements:
+# - The implementation of this project is based on various resources,
+#   including Python documentation and third-party libraries.
+#  https://www.youtube.com/watch?v=yQSEXcf6s2I&list=PLCC34OHNcOtoC6GglhF3ncJ5rLwQrLGnV
+#
+# License:
+# Licensed under a Creative Commons Attribution-Noncommercial-Share Alike 3.0
+# United States License.
+#
+# This license allows others to remix, tweak, and build upon the work non-commercially,
+# as long as they credit the author and license their new creations under the same terms.
+######################################################################
+
+
 import random
 import tkinter as tk
 from tkinter import filedialog, messagebox
