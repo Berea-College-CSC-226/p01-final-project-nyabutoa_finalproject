@@ -19,7 +19,7 @@
 # - The implementation of this project is based on various resources,
 #   including Python documentation and third-party libraries.
 #  https://www.youtube.com/watch?v=yQSEXcf6s2I&list=PLCC34OHNcOtoC6GglhF3ncJ5rLwQrLGnV
-#
+#  https://www.w3schools.com/python/python_lambda.asp
 # License:
 # Licensed under a Creative Commons Attribution-Noncommercial-Share Alike 3.0
 # United States License.
