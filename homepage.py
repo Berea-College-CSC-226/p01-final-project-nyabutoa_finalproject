@@ -1,7 +1,5 @@
 import tkinter as tk
-from tkinter import messagebox
-from tkinter import PhotoImage
-
+from PIL import Image, ImageTk
 
 def show_home_page():
     def go_to_main():
@@ -15,9 +13,22 @@ def show_home_page():
     home_window.geometry("800x600")
 
     try:
-        welcome_image = PhotoImage(file="/Users/arphaxadnyabuto/PycharmProjects/p01-final-project-nyabutoa_finalproject/image/welcome_image.png")
+        image_path = "/Users/arphaxadnyabuto/PycharmProjects/p01-final-project-nyabutoa_finalproject/image/welcome_image.png"
+        image = Image.open(image_path)
+
+        # Resize the image to a smaller size (e.g., 400x300)
+        resized_image = image.resize((400, 300))  # Resize the image to 400x300 pixels
+
+        # Convert the image to a Tkinter-compatible format
+        welcome_image = ImageTk.PhotoImage(resized_image)
+
+        # Create a label to display the image
         image_label = tk.Label(home_window, image=welcome_image)
         image_label.pack(pady=10)
+
+        # Keep a reference to the image to prevent it from being garbage collected
+        image_label.image = welcome_image
+
     except Exception as e:
         print(f"Error loading image: {e}")
 
