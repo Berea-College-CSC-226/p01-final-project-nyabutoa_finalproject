@@ -31,15 +31,16 @@
 
 import random
 import tkinter as tk
-from tkinter import filedialog, messagebox
+from tkinter import messagebox
+from tkinter import simpledialog
 
 class Song:
-    def __init__(self, title, artist, genre, mood, filepath):
+    def __init__(self, title, artist, genre, mood,):
         self.title = title
         self.artist = artist
         self.mood = mood
         self.genre = genre
-        self.filepath = filepath
+
 
     def __str__(self):
         return f"{self.title} by {self.artist} | Genre: {self.genre}, Mood: {self.mood}"
@@ -48,8 +49,8 @@ class Playlist:
     def __init__(self):
         self.songs = []
 
-    def add_song(self, title, artist, genre, mood, filepath):
-        song = Song(title, artist, genre, mood, filepath)
+    def add_song(self, title, artist, genre, mood):
+        song = Song(title, artist, genre, mood )
         self.songs.append(song)
         print(f"Added: {song}")
 
@@ -78,12 +79,7 @@ class Playlist:
                 keyword in song.genre.lower() or
                 keyword in song.mood.lower()):
                 results.append(song)
-        if results:
-            print(f"\nSearch results for '{keyword}':")
-            for song in results:
-                print(f"- {song}")
-        else:
-            print(f"No songs found for '{keyword}'.")
+        return results
 
     def playlist_shuffle(self):
         if self.songs:
@@ -132,23 +128,22 @@ class PlaylistManagerGui:
             self.song_listbox.insert(tk.END, str(song))
 
     def add_song(self):
-        title = simple_input("Enter song title:")
-        artist = simple_input("Enter artist name:")
-        genre = simple_input("Enter genre:")
-        mood = simple_input("Enter mood:")
+        title = simpledialog.askstring("Input", "Enter song title:")
+        artist = simpledialog.askstring("Input", "Enter artist name:")
+        genre = simpledialog.askstring("Input", "Enter genre:")
+        mood = simpledialog.askstring("Input", "Enter mood:")
 
-        file_path = filedialog.askopenfilename(title="Select a Music File",
-                                               filetypes=[("Audio Files", "*.mp3;*.wav;*.flac")])
-        if file_path:
-            self.playlist.add_song(title, artist, genre, mood, file_path)
+        if title and artist and genre and mood:
+            self.playlist.add_song(title, artist, genre, mood)
             self.display_songs()
         else:
-            messagebox.showwarning("No File Selected", "No file selected. Song not added.")
+            messagebox.showwarning("Invalid Input", "All fields must be filled.")
 
     def remove_song(self):
         title = simple_input("Enter song title to remove:")
-        self.playlist.remove_song(title)
-        self.display_songs()
+        if title:
+            self.playlist.remove_song(title)
+            self.display_songs()
 
     def shuffle_playlist(self):
         self.playlist.playlist_shuffle()
@@ -156,8 +151,9 @@ class PlaylistManagerGui:
 
     def search_song(self):
         keyword = simple_input("Enter keyword to search:")
-        result = self.playlist.search_song(keyword)
-        self.show_search_results(result)
+        if keyword:
+            result = self.playlist.search_song(keyword)
+            self.show_search_results(result)
 
     def sort_playlist(self):
         key = simple_input("Sort by (genre/artist/mood):")
@@ -178,7 +174,12 @@ class PlaylistManagerGui:
         search_window = tk.Toplevel(self.root)
         search_window.title("Search Results")
         text_box = tk.Text(search_window, height=10, width=50)
-        text_box.insert(tk.END, result)
+
+        if result:  # Change 'results' to 'result'
+            text_box.insert(tk.END, "\n".join(str(song) for song in result))  # Use 'result' here
+        else:
+            text_box.insert(tk.END, "No songs found.")
+
         text_box.pack(padx=10, pady=10)
 
 
