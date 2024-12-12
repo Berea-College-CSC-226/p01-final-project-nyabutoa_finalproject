@@ -98,6 +98,9 @@ class PlaylistManagerGui:
     def __init__(self, root, playlist):
         self.root = root
         self.root.title("Playlist Manager")
+
+        self.root.geometry("800x600")
+
         self.playlist = playlist
 
         self.song_listbox = tk.Listbox(root, width=60, height=15)
