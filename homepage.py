@@ -15,7 +15,7 @@ def show_home_page():
     home_window.geometry("800x600")
 
     try:
-        welcome_image = PhotoImage(file="welcome_image.png")
+        welcome_image = PhotoImage(file="/Users/arphaxadnyabuto/PycharmProjects/p01-final-project-nyabutoa_finalproject/image/welcome_image.png")
         image_label = tk.Label(home_window, image=welcome_image)
         image_label.pack(pady=10)
     except Exception as e:
