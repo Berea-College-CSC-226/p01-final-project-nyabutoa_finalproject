@@ -1,7 +1,17 @@
 import tkinter as tk
 from PIL import Image, ImageTk
+import pygame
 
 def show_home_page():
+    #Gret the program to have a welcome sound
+    pygame.mixer.init()
+
+    try:
+        pygame.mixer.music.load("/Users/arphaxadnyabuto/PycharmProjects/p01-final-project-nyabutoa_finalproject/audio/Welcome to the Playl.mp3")
+        pygame.mixer.music.play()
+    except pygame.error as e:
+        print(f"Error loading sound: {e}")
+
     def go_to_main():
         home_window.destroy()
         import Code  # Importing from code.py
