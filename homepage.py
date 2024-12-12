@@ -1,3 +1,37 @@
+######################################################################
+# Author: Alpha Nyabuto
+# Username: Nyabutoa
+#
+# Assignment: Final Project - Playlist Manager
+#
+# Purpose:
+# The home page allows users to:
+# - Learn about the features of the Playlist Manager
+# - Navigate to the main application where they can manage their playlists
+#
+# The program also utilizes sound and visual elements to create an
+# interactive experience, enhancing user engagement with the app from
+# the moment it starts.
+#
+######################################################################
+# Acknowledgements:
+# - The implementation of this project relies on several Python libraries
+#   including Tkinter for the GUI, Pygame for sound playback, and Pillow for image handling.
+#   Documentation and resources used:
+#   - Pygame Documentation for sound management: https://www.pygame.org/docs/ref/music.html
+#   - Pillow Documentation for image handling: https://pillow.readthedocs.io/en/stable/
+#   - Python Tkinter Documentation: https://docs.python.org/3/library/tkinter.html
+#   - Text-to-Speech service used for generating the welcome sound:
+#     https://www.narakeet.com/app/text-to-audio/?projectId=6f94e9ec-821a-460f-a63c-4bd8eb441a37
+#
+# License:
+# Licensed under a Creative Commons Attribution-Noncommercial-Share Alike 3.0
+# United States License.
+#
+# This license allows others to remix, tweak, and build upon the work non-commercially,
+# as long as they credit the author and license their new creations under the same terms.
+######################################################################
+
 import tkinter as tk
 from PIL import Image, ImageTk
 import pygame
@@ -8,11 +42,12 @@ def show_home_page():
 
     try:
         pygame.mixer.music.load("/Users/arphaxadnyabuto/PycharmProjects/p01-final-project-nyabutoa_finalproject/audio/Welcome to the Playl.mp3")
-        pygame.mixer.music.play()
+        pygame.mixer.music.play(loops=-1)  # Play the sound in a loop indefinitely
     except pygame.error as e:
         print(f"Error loading sound: {e}")
 
     def go_to_main():
+        pygame.mixer.music.stop()
         home_window.destroy()
         import Code  # Importing from code.py
         Code.main()  # Calling the main function from code.py
