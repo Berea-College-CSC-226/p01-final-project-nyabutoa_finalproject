@@ -37,6 +37,16 @@ from PIL import Image, ImageTk
 import pygame
 
 def show_home_page():
+    """
+Initializes and displays the home page for the Playlist Manager application.
+
+    This function creates a graphical user interface (GUI) using Tkinter to introduce the
+    Playlist Manager to the user. It includes the following features:
+    - A welcome sound that plays when the page loads (using Pygame).
+    - A visually appealing image (e.g., a logo or welcome graphic).
+    - A brief description of the Playlist Manager's features.
+    - A button that allows the user to navigate to the main playlist management functionality.
+"""
     #Get the program to have a welcome sound
     pygame.mixer.init()
 
@@ -47,6 +57,10 @@ def show_home_page():
         print(f"Error loading sound: {e}")
 
     def go_to_main():
+        """
+               Stops the welcome sound and closes the home page window, then opens the main
+               playlist management functionality from the 'Code' module.
+        """
         pygame.mixer.music.stop()
         home_window.destroy()
         import Code  # Importing from code.py

@@ -36,6 +36,15 @@ from tkinter import simpledialog
 
 class Song:
     def __init__(self, title, artist, genre, mood,):
+        """
+               Initialize a new Song instance.
+
+               Args:
+                   title (str): The title of the song.
+                   artist (str): The artist of the song.
+                   genre (str): The genre of the song.
+                   mood (str): The mood of the song.
+               """
         self.title = title
         self.artist = artist
         self.mood = mood
@@ -43,19 +52,45 @@ class Song:
 
 
     def __str__(self):
+        """
+               Return a string representation of the Song instance.
+
+               Returns:
+                   str: A formatted string showing the song's title, artist, genre, and mood.
+               """
         return f"{self.title} by {self.artist} | Genre: {self.genre}, Mood: {self.mood}"
     ##An f-string in Python allows you to include multiple expressions and variables within a single string.
 
 class Playlist:
+    """
+           Initialize a new Playlist instance.
+
+           The playlist starts with an empty list of songs.
+           """
     def __init__(self):
         self.songs = []
 
     def add_song(self, title, artist, genre, mood):
+        """
+              Add a new song to the playlist.
+
+              Args:
+                  title (str): The title of the song to add.
+                  artist (str): The artist of the song to add.
+                  genre (str): The genre of the song to add.
+                  mood (str): The mood of the song to add.
+              """
         song = Song(title, artist, genre, mood )
         self.songs.append(song)
         print(f"Added: {song}")
 
     def remove_song(self, title):
+        """
+               Remove a song from the playlist by its title.
+
+               Args:
+                   title (str): The title of the song to remove.
+               """
         for song in self.songs:  # using this so that all the songs in the playlist to find the song that matches the title the user wants to remove
             if song.title.lower() == title.lower(): # using the Lower to make string comparisons case-insensitive.
                 self.songs.remove(song)
@@ -64,6 +99,9 @@ class Playlist:
         print(f"Song title '{title}' not found in the playlist.")
 
     def show_songs(self):
+        """
+               Display all songs in the playlist.
+               """
         if not self.songs:  #checks if the songs list is empty
             #This is a boolean it checks for values that evaluate to True or False
             # This for loop Iterates through the playlist (self.songs) and prints each song.
@@ -76,6 +114,15 @@ class Playlist:
                 print(f"- {song}")
 
     def search_song(self, keyword):
+        """
+              Search for songs in the playlist that match a given keyword.
+
+              Args:
+                  keyword (str): The keyword to search for in song titles, artists, genres, or moods.
+
+              Returns:
+                  list: A list of Song instances that match the keyword.
+              """
         keyword = keyword.lower()
         results = []
         for song in self.songs:
@@ -87,19 +134,29 @@ class Playlist:
         return results
 
     def playlist_shuffle(self):
+        """
+              Shuffle the order of songs in the playlist.
+              """
         if self.songs:
             random.shuffle(self.songs)
             print("Playlist has been shuffled!")
         else:
             print("We cannot shuffle an empty playlist.")
 
-    def sort_songs(self, key):
-        if key not in ("genre", "artist", "mood"):
-            print(f"Invalid sort key: {key}. Use 'genre', 'artist', or 'mood'.")
-            return
-        self.songs.sort(key=lambda song: getattr(song, key).lower())
+    # def sort_songs(self, key):
+    #     if key not in ("genre", "artist", "mood"):
+    #         print(f"Invalid sort key: {key}. Use 'genre', 'artist', or 'mood'.")
+    #         return
+    #     self.songs.sort(key=lambda song: getattr(song, key).lower())
 
 class PlaylistManagerGui:
+    """
+            Initialize the GUI for the Playlist Manager.
+
+            Args:
+                root (tk.Tk): The main Tkinter window.
+                playlist (Playlist): The Playlist instance to manage.
+            """
     def __init__(self, root, playlist):
         self.root = root
         self.root.title("Playlist Manager")
@@ -129,6 +186,9 @@ class PlaylistManagerGui:
         self.display_songs()
 
     def display_songs(self):
+        """
+               Update the displayed list of songs in the GUI.
+               """
         # Clear the Listbox
         self.song_listbox.delete(0, tk.END)
         # Add songs from the playlist to the Listbox
@@ -137,6 +197,9 @@ class PlaylistManagerGui:
             self.song_listbox.insert(tk.END, str(song)) #The tk.END constant tells Tkinter to insert the new song after the last item
 
     def add_song(self):
+        """
+                Prompt the user for song details and add the song to the playlist.
+                """
         title = simpledialog.askstring("Input", "Enter song title:")
         artist = simpledialog.askstring("Input", "Enter artist name:")
         genre = simpledialog.askstring("Input", "Enter genre:")
@@ -149,22 +212,34 @@ class PlaylistManagerGui:
             messagebox.showwarning("Invalid Input", "All fields must be filled.")
 
     def remove_song(self):
+        """
+                Prompt the user for a song title and remove the corresponding song from the playlist.
+                """
         title = simple_input("Enter song title to remove:")
         if title:
             self.playlist.remove_song(title)
             self.display_songs()
 
     def shuffle_playlist(self):
+        """
+               Shuffle the songs in the playlist and update the GUI display.
+               """
         self.playlist.playlist_shuffle()
         self.display_songs()
 
     def search_song(self):
+        """
+               Prompt the user for a keyword and display the search results.
+               """
         keyword = simple_input("Enter keyword to search:")  #keyword is retrieved by calling the simple_input() function, which opens a dialog window asking the user to input a keyword for the search
         if keyword:
             result = self.playlist.search_song(keyword)
             self.show_search_results(result)
 
     def sort_playlist(self):
+        """
+                Prompt the user for a sort key and sort the playlist accordingly.
+                """
         key = simple_input("Sort by (genre/artist/mood):")
 
         if key:  # Check if the input is not None or empty
@@ -180,6 +255,12 @@ class PlaylistManagerGui:
             messagebox.showwarning("No Input", "You must enter a valid sort key (genre/artist/mood).")
 
     def show_search_results(self, result):
+        """
+                Display the search results in a new window.
+
+                Args:
+                    result (list): A list of Song instances that were found during the search.
+                """
         search_window = tk.Toplevel(self.root)
         search_window.title("Search Results")
         text_box = tk.Text(search_window, height=10, width=50)
@@ -193,6 +274,15 @@ class PlaylistManagerGui:
 
 
 def simple_input(prompt):
+    """
+        Create a simple dialog for user input.
+
+        Args:
+            prompt (str): The message to display in the dialog.
+
+        Returns:
+            str: The user's input from the dialog.
+        """
     input_window = tk.Toplevel()
     input_window.title(prompt)
 
@@ -214,6 +304,9 @@ def simple_input(prompt):
 
 
 def main():
+    """
+     Main function to run the Playlist Manager GUI.
+     """
     root = tk.Tk()
     playlist = Playlist()
     PlaylistManagerGui(root, playlist)
