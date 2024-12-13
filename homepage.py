@@ -37,7 +37,7 @@ from PIL import Image, ImageTk
 import pygame
 
 def show_home_page():
-    #Gret the program to have a welcome sound
+    #Get the program to have a welcome sound
     pygame.mixer.init()
 
     try:

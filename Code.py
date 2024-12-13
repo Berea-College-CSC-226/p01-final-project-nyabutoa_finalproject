@@ -44,6 +44,7 @@ class Song:
 
     def __str__(self):
         return f"{self.title} by {self.artist} | Genre: {self.genre}, Mood: {self.mood}"
+    ##An f-string in Python allows you to include multiple expressions and variables within a single string.
 
 class Playlist:
     def __init__(self):
@@ -55,15 +56,19 @@ class Playlist:
         print(f"Added: {song}")
 
     def remove_song(self, title):
-        for song in self.songs:
-            if song.title.lower() == title.lower():
+        for song in self.songs:  # using this so that all the songs in the playlist to find the song that matches the title the user wants to remove
+            if song.title.lower() == title.lower(): # using the Lower to make string comparisons case-insensitive.
                 self.songs.remove(song)
                 print(f"Removed: {song}")
                 return
         print(f"Song title '{title}' not found in the playlist.")
 
     def show_songs(self):
-        if not self.songs:
+        if not self.songs:  #checks if the songs list is empty
+            #This is a boolean it checks for values that evaluate to True or False
+            # This for loop Iterates through the playlist (self.songs) and prints each song.
+            #Displays the song's information by calling __str__() on each Song object.
+
             print("The playlist is empty.")
         else:
             print("\nPlaylist:")
@@ -74,7 +79,7 @@ class Playlist:
         keyword = keyword.lower()
         results = []
         for song in self.songs:
-            if (keyword in song.title.lower() or
+            if (keyword in song.title.lower() or   #keyword is used to search through the playlist.
                 keyword in song.artist.lower() or
                 keyword in song.genre.lower() or
                 keyword in song.mood.lower()):
@@ -127,8 +132,9 @@ class PlaylistManagerGui:
         # Clear the Listbox
         self.song_listbox.delete(0, tk.END)
         # Add songs from the playlist to the Listbox
+        # This loop is used to display all songs in the GUI by inserting them into the Listbox widget
         for song in self.playlist.songs:
-            self.song_listbox.insert(tk.END, str(song))
+            self.song_listbox.insert(tk.END, str(song)) #The tk.END constant tells Tkinter to insert the new song after the last item
 
     def add_song(self):
         title = simpledialog.askstring("Input", "Enter song title:")
@@ -153,7 +159,7 @@ class PlaylistManagerGui:
         self.display_songs()
 
     def search_song(self):
-        keyword = simple_input("Enter keyword to search:")
+        keyword = simple_input("Enter keyword to search:")  #keyword is retrieved by calling the simple_input() function, which opens a dialog window asking the user to input a keyword for the search
         if keyword:
             result = self.playlist.search_song(keyword)
             self.show_search_results(result)
